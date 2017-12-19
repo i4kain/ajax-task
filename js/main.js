@@ -1,11 +1,16 @@
 const id = new Id(1);
 
-getAlbum(id);
+const view = {
+    displayPhotoList,
+    setAlbumTitle
+}
+
+getAlbum(id, view);
 
 document.querySelector('.album__btn_next').onclick = () => {
-    getNextAlbum(id);
+    getNextAlbum(id, view);
 };
 
 document.querySelector('.album__btn_prev').onclick = () => {
-    getPrevAlbum(id);
+    getPrevAlbum(id, view);
 };

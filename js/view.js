@@ -7,22 +7,22 @@ function displayPhotoList(photoArr) {
         return;
     }    
 
-    photoArr.map((photo) => {
-        let img = document.createElement('img');
-        img.src = photo.thumbnailUrl;
-        img.alt = photo.title;
+    photoArr.map(({title, url, thumbnailUrl}) => {        
+        const img = document.createElement('img');
+        img.src = thumbnailUrl;
+        img.alt = title;
         img.classList.add('album__img')
-        return [img, photo.url]})
-    .map((elem, index) => {
+        return [img, url]})
+    .map(([img, url], index) => {
         let a = document.createElement('a');
-        a.href = elem[1];
+        a.href = url;
         a.target = '_blank';
         a.title = `photo ${index + 1}`;
         a.classList.add('album__link');
         if((index + 1) % 3 === 0){
             a.classList.add('zero-rigth-margin');   
         }
-        a.appendChild(elem[0]);
+        a.appendChild(img);
         return a;})    
     .forEach((link) => {
         albumPhoto.appendChild(link);                    
@@ -31,6 +31,5 @@ function displayPhotoList(photoArr) {
 
 function setAlbumTitle(albumInfo){
     let albumTitle = document.querySelector('.album__title');
-    albumTitle.textContent = (albumInfo.title) ? albumInfo.title : 'Unknown album title';    
-
+    albumTitle.textContent = (albumInfo.title) ? albumInfo.title : 'Unknown album title';
 }

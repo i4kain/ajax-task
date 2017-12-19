@@ -1,25 +1,21 @@
-function getAlbum(id) {
+function getAlbum(id, view) {
     const myInit = {
         method: 'GET',
         mod: 'cors'
     };
 
-    fetch(`https://jsonplaceholder.typicode.com/albums/${id.currentId()}`, myInit)
+    fetch(`https://jsonplaceholder.typicode.com/albums/${id.id}`, myInit)
         .then(status)
-        .then((response) => {            
-            return response.json();            
-        })
-        .then(setAlbumTitle)
+        .then((response) =>  response.json())
+        .then(view.setAlbumTitle)
         .catch(function (error) {
             console.log('Fetch Error :-S', error);
          });       
         
-    fetch(`https://jsonplaceholder.typicode.com/albums/${id.currentId()}/photos`, myInit)
+    fetch(`https://jsonplaceholder.typicode.com/albums/${id.id}/photos`, myInit)
         .then(status)
-        .then((response) => {
-           return response.json();
-        })
-        .then(displayPhotoList)
+        .then((response) => response.json())
+        .then(view.displayPhotoList)
         .catch(function (error) {
             console.log('Fetch Error :-S', error);
     });
@@ -27,12 +23,12 @@ function getAlbum(id) {
 
 function getNextAlbum(id) {
     id.next();
-    getAlbum(id);
+    getAlbum(id, view);
 }
 
 function getPrevAlbum(id) {
-    if(id.currentId() > 1){
+    if(id.id > 1){
         id.prev();
-        getAlbum(id);
+        getAlbum(id, view);
     }
 }

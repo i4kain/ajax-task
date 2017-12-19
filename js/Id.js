@@ -2,8 +2,8 @@ class Id {
     constructor(id){
         this._id = (id < 1) ? 1 : id;
     }
-
-    currentId() {
+     
+    get id() {
         return this._id;
     }
 
